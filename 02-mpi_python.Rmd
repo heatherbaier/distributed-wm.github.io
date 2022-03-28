@@ -1,0 +1,13 @@
+# MPI & Python
+
+## What is MPI?
+## Rank & World Size
+## Types of Communication
+
+### Overview and difference between P2P and CC - you see them everywhere
+### Block / non-blocking
+### Point-to-Point Communication
+### Collective Communication
+
+
+## References & Helpful Sites

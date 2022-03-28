@@ -1,0 +1,24 @@
+# Distributed Training
+
+
+## Overview of Distributed Training
+### What does D.T. gain you?
+### Chart of Pros and Cons and Types of Training
+
+## Distributed Training in PyTorch
+### Installing PyTorch
+### Launch Utility
+### Process Groups
+### Distributed Data Parallel (DDP)
+#### With CUDA
+#### Without CUDA
+### Parameter Server Strategy & RPC
+### References & Helpful Sites
+
+## Distributed Training in TensorFlow
+### tfds & large Tensorflow Datasets
+### References & Helpful Sites
+
+## Other Distributed Training Frameworks
+### Microsoft’s DeepSpeed
+
