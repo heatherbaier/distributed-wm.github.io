@@ -41,7 +41,7 @@ if __name__ == "__main__":
 
 #### Without CUDA
 
-### Tensorflow's MultiWorkerMirroredStrategy
+### Tensorflow's `MultiWorkerMirroredStrategy()`
 
 **Loading files that can't fit into memory all at once using Python Generators**
 
@@ -88,7 +88,7 @@ print("Number of validation files: ", len(val_files))
 >>> Number of validation files: 
 ```
 
-**Initializing the MultiWorkerMirroredStrategy**
+**Initializing the `MultiWorkerMirroredStrategy()`**
 
 ``` python
 strategy = tf.distribute.experimental.MultiWorkerMirroredStrategy()
@@ -107,7 +107,7 @@ with strategy.scope():
     )
 ```
 
-**Train the MultiWorkerMirroredStrategy model**
+**Train the `MultiWorkerMirroredStrategy()` model**
 
 ``` python
 multi_worker_model.fit(train_dataset,
@@ -116,7 +116,7 @@ multi_worker_model.fit(train_dataset,
                         
 ```
 
-#### Launching a Tensorflow MultiWorkerMirroredStrategy script
+#### Launching a Tensorflow `MultiWorkerMirroredStrategy()` script
 
 Launching a multi-worker training job is a little more intricate than simply calling `python train.py`. In order to set up our cluster, we need to know the IP addresses of each node in our job, then we need to launch the training scipt on each node individually. We'll use a set of bash scripts to do this.
 
@@ -183,13 +183,15 @@ def make_config(rank,  direc, port):
     return json.dumps(config)
 ```
 
-**Replication Code** 
+**Replication Code**
 
-Replication code is in the folder: https://github.com/heatherbaier/distributed-wm.github.io/tree/gh-pages/examples/tf_mwms
+Replication code is in the folder: <https://github.com/heatherbaier/distributed-wm.github.io/tree/gh-pages/examples/tf_mwms>
 
-To launch the training script, open up a terminal and ssh into Vortex, then type:
+To launch the training script, open up a terminal and ssh into Vortex.
 
-```
+If you've never done the tutorial before, copy the below into your terminal and hit enter.
+
+``` sh
 mkdir tf_mwms
 cd tf_mwms
 
@@ -208,6 +210,10 @@ chmod +x run.sh
 
 ./run.sh <NUM_NODES>
 ```
+
+If you've done the tutorial before, simply cd into examples/tf_mwms and run:
+
+    ./run.sh <NUM_NODES>
 
 ### References & Helpful Sites
 
