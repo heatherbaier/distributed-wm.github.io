@@ -82,24 +82,10 @@ print("Number of training files: ", len(train_files))
 print("Number of validation files: ", len(val_files)) 
 ```
 
-    >>> Number of nCDF files: 
-    >>> Number of training files: 
-    >>> Number of validation files: 
-
-**Setting up the training cluster using TF_CONFIG**
-
 ``` python
-ips_direc = "/sciclone/home20/hmbaier/tflow/ips/"
-os.environ["TF_CONFIG"] = make_config(int(args.rank) - 1, ips_direc, 45962)
-
-
-def make_config(rank,  direc, port):
-    ips = []
-    for file in os.listdir(direc):
-        with open(direc + file, "r") as f:
-            ips.append(f"{f.read().splitlines()[0]}:{port}")
-    config = {"cluster": {"worker": ips}, "task": {"index": int(rank), "type": "worker"}}
-    return json.dumps(config)
+>>> Number of nCDF files: 
+>>> Number of training files: 
+>>> Number of validation files: 
 ```
 
 **Initializing the MultiWorkerMirroredStrategy**
@@ -130,16 +116,98 @@ multi_worker_model.fit(train_dataset,
                         
 ```
 
+#### Launching a Tensorflow MultiWorkerMirroredStrategy script
 
-**Replication Code**
-Replication code is in the folder:  
+Launching a multi-worker training job is a little more intricate than simply calling `python train.py`. In order to set up our cluster, we need to know the IP addresses of each node in our job, then we need to launch the training scipt on each node individually. We'll use a set of bash scripts to do this.
+
+**run.sh**
+
+The rm commands inthis script delete files from any previous runs. The purpose of this script is to qsub the `tflow_job.sh` job on the number of nodes that you want to include in training. This is the only scipt you'll run to launch your training. You can use it by running: `./run.sh <NUM_NODES>`
+
+``` bash
+rm -R /sciclone/home20/hmbaier/tflow/ips/
+mkdir /sciclone/home20/hmbaier/tflow/ips/
+
+rm -R /sciclone/home20/hmbaier/tflow/logs/
+mkdir /sciclone/home20/hmbaier/tflow/logs/
+
+for ((i = 1; i <= $1; i++))
+do
+    qsub /sciclone/home20/hmbaier/tflow/tflow_job.sh -l nodes=1:vortex:ppn=1 -v NODE_NUM=$i,WORLD_SIZE=$1
+done
+```
+
+``` sh
+#!/bin/tcsh
+#PBS -N head_node
+#PBS -l walltime=10:00:00
+#PBS -j oe
 
 
-### References & Helpful Sites
+hostname -i > /sciclone/home20/hmbaier/tflow/ips/$NODE_NUM.txt
 
-## Distributed Training in TensorFlow
+set size=`ls /sciclone/home20/hmbaier/tflow/ips/ | wc -l`
 
-### tfds & large Tensorflow Datasets
+while ( $size != $WORLD_SIZE )
+    set size=`ls /sciclone/home20/hmbaier/tflow/ips/ | wc -l`
+    sleep 1
+end
+
+echo "$size"
+
+
+# init conda within new shell for job
+source "/usr/local/anaconda3-2021.05/etc/profile.d/conda.csh"
+module load anaconda3/2021.05
+unsetenv PYTHONPATH
+conda activate tflow
+
+python3 /sciclone/home20/hmbaier/tflow/worker_v5.py $NODE_NUM $WORLD_SIZE > "/sciclone/home20/hmbaier/tflow/logs/log${NODE_NUM}.txt"
+```
+
+**Connecting to the Python script: Setting up the training cluster using TF_CONFIG**
+
+The tflow_job you submitted through `run.sh` will call a file called `ips.sh` that will save a text file with thte IP address of each node that will participate in training. At the beginning of our python training script, we will use this make_config function to format those IP address into the environment variable Tensorflow needs to set up it's training cluster.
+
+``` python
+ips_direc = "/sciclone/home20/hmbaier/tflow/ips/"
+os.environ["TF_CONFIG"] = make_config(int(args.rank) - 1, ips_direc, 45962)
+
+
+def make_config(rank,  direc, port):
+    ips = []
+    for file in os.listdir(direc):
+        with open(direc + file, "r") as f:
+            ips.append(f"{f.read().splitlines()[0]}:{port}")
+    config = {"cluster": {"worker": ips}, "task": {"index": int(rank), "type": "worker"}}
+    return json.dumps(config)
+```
+
+**Replication Code** 
+
+Replication code is in the folder: https://github.com/heatherbaier/distributed-wm.github.io/tree/gh-pages/examples/tf_mwms
+
+To launch the training script, open up a terminal and ssh into Vortex, then type:
+
+```
+mkdir tf_mwms
+cd tf_mwms
+
+git init .
+git remote add -f origin https://github.com/heatherbaier/distributed-wm.github.io.git
+git config core.sparseCheckout true
+
+echo "examples/tf_mwms/" >> .git/info/sparse-checkout
+
+git pull origin master
+git checkout gh-pages
+
+cd examples/tf_mwms
+
+chmod +x run.sh
+
+./run.sh <NUM_NODES>
+```
 
 ### References & Helpful Sites
 
