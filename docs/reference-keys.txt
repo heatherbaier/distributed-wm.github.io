@@ -31,3 +31,8 @@ tfds-large-tensorflow-datasets
 references-helpful-sites-2
 other-distributed-training-frameworks
 microsofts-deepspeed
+introduction
+multi-worker-training
+pytorch-distributed-data-parallel-ddp
+tensorflows-multiworkermirroredstrategy
+launching-a-tensorflow-multiworkermirroredstrategy-script
