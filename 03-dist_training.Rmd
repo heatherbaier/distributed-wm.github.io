@@ -1,12 +1,32 @@
-# Distributed Training
+# Distributed Training {#disttraining}
 
 ## Overview of Distributed Training
+
+Distributed computing and parallel computing have one key difference: parallel computing simultaneously uses all of the resources available on a single computer to perform tasks concurrently. Distributed computing simultaneously uses the resources across a cluster of computers to perform tasks simultaneously. There are two key advantages of this.
+
+First, when using very large datasets to train deep learning models, by distributed our dataset across multiple machines, we increase the memory available during training. This is one of the two core types of distributed learning, called **Distributed Data Parallel***.*
+
+The second key advantage is when you are training a model that requires a large memory footprint. This is the second type of distributed training, called **Distributed Model Parallel**. In this case, we would programatically send set sets of layers in our model to different machines within our cluster, then use a technique called *distributed autograd* to preform our back-propagation on weight update. More on this later!
+
+## Dataset used for the examples
+
+The dataset we'll be using for each of the examples is from the Global Education Observatory (GEO) project. The imagery is from Landsat and is the 256x256 pixel bounding box around schools in Mexico, the Philippines and Brazil. They variable we are predicting is the average national achievement test score obtained by students at that school during a given year. This dataset is not large compared to the datasets you would normally to use for distributed training, however it serves as a great, clean datset for example purposes.
+
+The imagery can be accessed using Vortex and is located at `/sciclone/geograd/CCI/hmbaier/` and the CSV contained the Y variable is located at `/sciclone/geograd/CCI/hmbaier/cci_final.csv`
+
+An example of the imagery is here:
+
+<img src="dataset_example.png" width="500"/>
+
+<https://github.com/heatherbaier/distributed-wm.github.io/blob/47799a965db180d67a883d7f34d2e58ca1d93e90/examples/tf_mwms/run.sh#L1-L10>
+
+
 
 ### What does D.T. gain you?
 
 ### Chart of Pros and Cons and Types of Training
 
-## Multi-worker Training
+## Distributed Data Parallel
 
 ### Pytorch Distributed Data Parallel (DDP)
 

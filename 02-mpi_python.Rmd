@@ -1,13 +1,49 @@
-# MPI & Python
+# MPI & Python {#mpipython}
 
 ## What is MPI?
-## Rank & World Size
+
+MPI stands for Message Passing Interface and is a way of passing messages between mutiple computers running a parallel program.
+
+Parallel computing works by launching multiple processes on a computer that run in parallel. Each os these processes is called a rank.
+
+`Rank: Each process in a parallel program has a unique rank, i.e. an integer identifier. The rank value is between 0 and the number of processes - 1.`
+
+The sum of all of these ranks is called the *world size*.
+
+`World Size: Total number of ranks in a parallel program.`
+
 ## Types of Communication
 
-### Overview and difference between P2P and CC - you see them everywhere
-### Block / non-blocking
-### Point-to-Point Communication
-### Collective Communication
+### Blocking Communication
 
+### Non-Blocking Communication
 
-## References & Helpful Sites
+### Point to Point (P2P)
+
+Point-to-Point (P2P) communication occurs when only two prcoess within a parallel program communicate with each other. For example, there exists a parallel program that has 10 processes (i.e. the world size is 10). Process 1 sends a message to Process 2 letting it know that it has completed a task, but does not communicate with any other process. This is an example of P2P communication.
+
+#### Blocking P2P Methods
+
+send
+
+recv
+
+#### Non-Blocking P2P Methods
+
+isend
+
+irecv
+
+### Collective Communication (CC)
+
+Collective communication (CC) is a type of communication that involves all or some of the processes in a parallel program. For example, we take our same parallel program that has 10 processes. The objective of process 1 is to average a value that is stored on each of the other processes. In this case.process 1 would issue a CC call to the other nodes and *collect* their values in order to average them. Because process 1 communicated with multiple nodes instead of just 1, this is an example of collective communication.
+
+#### CC Methods
+
+bcast
+
+scatter
+
+gather
+
+### References & Helpful Sites

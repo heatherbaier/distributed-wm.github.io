@@ -1,6 +1,6 @@
 --- 
 title: "Distributed ML at W&M"
-author: "Heather Baier"
+author: 
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -9,7 +9,6 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: heatherbaier/distributed-wm.github.io
-description: "Resrouces and help for distributed ML on the W&M cluster"
+description: "."
 ---
 
-# Introduction

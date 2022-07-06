@@ -23,7 +23,7 @@
 <meta name="author" content="Heather Baier" />
 
 
-<meta name="date" content="2022-03-28" />
+<meta name="date" content="2022-07-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -175,20 +175,21 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="4" data-path="distributed-training.html"><a href="distributed-training.html"><i class="fa fa-check"></i><b>4</b> Distributed Training<span></span></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="distributed-training.html"><a href="distributed-training.html#overview-of-distributed-training"><i class="fa fa-check"></i><b>4.1</b> Overview of Distributed Training<span></span></a>
+<li class="chapter" data-level="4.1" data-path="distributed-training.html"><a href="distributed-training.html#overview-of-distributed-training"><i class="fa fa-check"></i><b>4.1</b> Overview of Distributed Training<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="distributed-training.html"><a href="distributed-training.html#dataset-used-for-the-examples"><i class="fa fa-check"></i><b>4.2</b> Dataset used for the examples<span></span></a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="distributed-training.html"><a href="distributed-training.html#what-does-d.t.-gain-you"><i class="fa fa-check"></i><b>4.1.1</b> What does D.T. gain you?<span></span></a></li>
-<li class="chapter" data-level="4.1.2" data-path="distributed-training.html"><a href="distributed-training.html#chart-of-pros-and-cons-and-types-of-training"><i class="fa fa-check"></i><b>4.1.2</b> Chart of Pros and Cons and Types of Training<span></span></a></li>
+<li class="chapter" data-level="4.2.1" data-path="distributed-training.html"><a href="distributed-training.html#what-does-d.t.-gain-you"><i class="fa fa-check"></i><b>4.2.1</b> What does D.T. gain you?<span></span></a></li>
+<li class="chapter" data-level="4.2.2" data-path="distributed-training.html"><a href="distributed-training.html#chart-of-pros-and-cons-and-types-of-training"><i class="fa fa-check"></i><b>4.2.2</b> Chart of Pros and Cons and Types of Training<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="distributed-training.html"><a href="distributed-training.html#multi-worker-training"><i class="fa fa-check"></i><b>4.2</b> Multi-worker Training<span></span></a>
+<li class="chapter" data-level="4.3" data-path="distributed-training.html"><a href="distributed-training.html#distributed-data-parallel"><i class="fa fa-check"></i><b>4.3</b> Distributed Data Parallel<span></span></a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="distributed-training.html"><a href="distributed-training.html#pytorch-distributed-data-parallel-ddp"><i class="fa fa-check"></i><b>4.2.1</b> Pytorch Distributed Data Parallel (DDP)<span></span></a></li>
-<li class="chapter" data-level="4.2.2" data-path="distributed-training.html"><a href="distributed-training.html#tensorflows-multiworkermirroredstrategy"><i class="fa fa-check"></i><b>4.2.2</b> Tensorflow’s <code>MultiWorkerMirroredStrategy()</code><span></span></a></li>
-<li class="chapter" data-level="4.2.3" data-path="distributed-training.html"><a href="distributed-training.html#references-helpful-sites-1"><i class="fa fa-check"></i><b>4.2.3</b> References &amp; Helpful Sites<span></span></a></li>
+<li class="chapter" data-level="4.3.1" data-path="distributed-training.html"><a href="distributed-training.html#pytorch-distributed-data-parallel-ddp"><i class="fa fa-check"></i><b>4.3.1</b> Pytorch Distributed Data Parallel (DDP)<span></span></a></li>
+<li class="chapter" data-level="4.3.2" data-path="distributed-training.html"><a href="distributed-training.html#tensorflows-multiworkermirroredstrategy"><i class="fa fa-check"></i><b>4.3.2</b> Tensorflow’s <code>MultiWorkerMirroredStrategy()</code><span></span></a></li>
+<li class="chapter" data-level="4.3.3" data-path="distributed-training.html"><a href="distributed-training.html#references-helpful-sites-1"><i class="fa fa-check"></i><b>4.3.3</b> References &amp; Helpful Sites<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="distributed-training.html"><a href="distributed-training.html#other-distributed-training-frameworks"><i class="fa fa-check"></i><b>4.3</b> Other Distributed Training Frameworks<span></span></a>
+<li class="chapter" data-level="4.4" data-path="distributed-training.html"><a href="distributed-training.html#other-distributed-training-frameworks"><i class="fa fa-check"></i><b>4.4</b> Other Distributed Training Frameworks<span></span></a>
 <ul>
-<li class="chapter" data-level="4.3.1" data-path="distributed-training.html"><a href="distributed-training.html#microsofts-deepspeed"><i class="fa fa-check"></i><b>4.3.1</b> Microsoft’s DeepSpeed<span></span></a></li>
+<li class="chapter" data-level="4.4.1" data-path="distributed-training.html"><a href="distributed-training.html#microsofts-deepspeed"><i class="fa fa-check"></i><b>4.4.1</b> Microsoft’s DeepSpeed<span></span></a></li>
 </ul></li>
 </ul></li>
 <li><a href="references.html#references">References<span></span></a></li>
@@ -216,19 +217,30 @@ div.csl-indent {
 <h1><span class="header-section-number">Chapter 4</span> Distributed Training<a href="distributed-training.html#distributed-training" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="overview-of-distributed-training" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Overview of Distributed Training<a href="distributed-training.html#overview-of-distributed-training" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="what-does-d.t.-gain-you" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> What does D.T. gain you?<a href="distributed-training.html#what-does-d.t.-gain-you" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Distributed computing and parallel computing have one key difference: parallel computing simultaneously uses all of the resources available on a single computer to perform tasks concurrently. Distributed computing simultaneously uses the resources across a cluster of computers to perform tasks simultaneously. There are two key advantages of this.</p>
+<p>First, when using very large datasets to train deep learning models, by distributed our dataset across multiple machines, we increase the memory available during training. This is one of the two core types of distributed learning, called <strong>Distributed Data Parallel</strong><em>.</em></p>
+<p>The second key advantage is when you are training a model that requires a large memory footprint. This is the second type of distributed training, called <strong>Distributed Model Parallel</strong>. In this case, we would programatically send set sets of layers in our model to different machines within our cluster, then use a technique called <em>distributed autograd</em> to preform our back-propagation on weight update. More on this later!</p>
 </div>
-<div id="chart-of-pros-and-cons-and-types-of-training" class="section level3 hasAnchor" number="4.1.2">
-<h3><span class="header-section-number">4.1.2</span> Chart of Pros and Cons and Types of Training<a href="distributed-training.html#chart-of-pros-and-cons-and-types-of-training" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dataset-used-for-the-examples" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Dataset used for the examples<a href="distributed-training.html#dataset-used-for-the-examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The dataset we’ll be using for each of the examples is from the Global Education Observatory (GEO) project. The imagery is from Landsat and is the 256x256 pixel bounding box around schools in Mexico, the Philippines and Brazil. They variable we are predicting is the average national achievement test score obtained by students at that school during a given year. This dataset is not large compared to the datasets you would normally to use for distributed training, however it serves as a great, clean datset for example purposes.</p>
+<p>The imagery can be accessed using Vortex and is located at <code>/sciclone/geograd/CCI/hmbaier/</code> and the CSV contained the Y variable is located at <code>/sciclone/geograd/CCI/hmbaier/cci_final.csv</code></p>
+<p>An example of the imagery is here:</p>
+<p><img src="dataset_example.png" width="500"/></p>
+<p><a href="https://github.com/heatherbaier/distributed-wm.github.io/blob/47799a965db180d67a883d7f34d2e58ca1d93e90/examples/tf_mwms/run.sh#L1-L10" class="uri">https://github.com/heatherbaier/distributed-wm.github.io/blob/47799a965db180d67a883d7f34d2e58ca1d93e90/examples/tf_mwms/run.sh#L1-L10</a></p>
+<div id="what-does-d.t.-gain-you" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> What does D.T. gain you?<a href="distributed-training.html#what-does-d.t.-gain-you" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="chart-of-pros-and-cons-and-types-of-training" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Chart of Pros and Cons and Types of Training<a href="distributed-training.html#chart-of-pros-and-cons-and-types-of-training" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="multi-worker-training" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Multi-worker Training<a href="distributed-training.html#multi-worker-training" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="pytorch-distributed-data-parallel-ddp" class="section level3 hasAnchor" number="4.2.1">
-<h3><span class="header-section-number">4.2.1</span> Pytorch Distributed Data Parallel (DDP)<a href="distributed-training.html#pytorch-distributed-data-parallel-ddp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div id="with-cuda" class="section level4 hasAnchor" number="4.2.1.1">
-<h4><span class="header-section-number">4.2.1.1</span> With CUDA<a href="distributed-training.html#with-cuda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="distributed-data-parallel" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Distributed Data Parallel<a href="distributed-training.html#distributed-data-parallel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="pytorch-distributed-data-parallel-ddp" class="section level3 hasAnchor" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Pytorch Distributed Data Parallel (DDP)<a href="distributed-training.html#pytorch-distributed-data-parallel-ddp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="with-cuda" class="section level4 hasAnchor" number="4.3.1.1">
+<h4><span class="header-section-number">4.3.1.1</span> With CUDA<a href="distributed-training.html#with-cuda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p><strong>Setup GPU cluster &amp; initialize the distributed process group</strong></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="distributed-training.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> setup(rank, world_size):</span>
 <span id="cb3-2"><a href="distributed-training.html#cb3-2" aria-hidden="true" tabindex="-1"></a>    </span>
@@ -249,12 +261,12 @@ div.csl-indent {
 <span id="cb4-9"><a href="distributed-training.html#cb4-9" aria-hidden="true" tabindex="-1"></a>             nprocs<span class="op">=</span>world_size,</span>
 <span id="cb4-10"><a href="distributed-training.html#cb4-10" aria-hidden="true" tabindex="-1"></a>             join<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
 </div>
-<div id="without-cuda" class="section level4 hasAnchor" number="4.2.1.2">
-<h4><span class="header-section-number">4.2.1.2</span> Without CUDA<a href="distributed-training.html#without-cuda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="without-cuda" class="section level4 hasAnchor" number="4.3.1.2">
+<h4><span class="header-section-number">4.3.1.2</span> Without CUDA<a href="distributed-training.html#without-cuda" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 </div>
 </div>
-<div id="tensorflows-multiworkermirroredstrategy" class="section level3 hasAnchor" number="4.2.2">
-<h3><span class="header-section-number">4.2.2</span> Tensorflow’s <code>MultiWorkerMirroredStrategy()</code><a href="distributed-training.html#tensorflows-multiworkermirroredstrategy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="tensorflows-multiworkermirroredstrategy" class="section level3 hasAnchor" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Tensorflow’s <code>MultiWorkerMirroredStrategy()</code><a href="distributed-training.html#tensorflows-multiworkermirroredstrategy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Loading files that can’t fit into memory all at once using Python Generators</strong></p>
 <p>If we have a dataset that is too large to load into memory all at once, we’ll need to use a <em>generator</em>. Generators allow you to return only one value of a loop at a time. So in the code below, the training step will call the generator at each step, but when it hits ‘yield’, it will return the data the training code. Once the training code calls the generator again, it will pick up at the same place it left off and continue with the for loop, returning the next batch of data. This way, we only ever load one batch data into memory at a time.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="distributed-training.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_train():</span>
@@ -307,8 +319,8 @@ div.csl-indent {
 <span id="cb9-2"><a href="distributed-training.html#cb9-2" aria-hidden="true" tabindex="-1"></a>                    steps_per_epoch <span class="op">=</span> <span class="bu">int</span>(<span class="bu">len</span>(files) <span class="op">//</span> <span class="bu">int</span>(args.world_size)),</span>
 <span id="cb9-3"><a href="distributed-training.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                    validation_data <span class="op">=</span> val_dataset)</span>
 <span id="cb9-4"><a href="distributed-training.html#cb9-4" aria-hidden="true" tabindex="-1"></a>                        </span></code></pre></div>
-<div id="launching-a-tensorflow-multiworkermirroredstrategy-script" class="section level4 hasAnchor" number="4.2.2.1">
-<h4><span class="header-section-number">4.2.2.1</span> Launching a Tensorflow <code>MultiWorkerMirroredStrategy()</code> script<a href="distributed-training.html#launching-a-tensorflow-multiworkermirroredstrategy-script" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<div id="launching-a-tensorflow-multiworkermirroredstrategy-script" class="section level4 hasAnchor" number="4.3.2.1">
+<h4><span class="header-section-number">4.3.2.1</span> Launching a Tensorflow <code>MultiWorkerMirroredStrategy()</code> script<a href="distributed-training.html#launching-a-tensorflow-multiworkermirroredstrategy-script" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Launching a multi-worker training job is a little more intricate than simply calling <code>python train.py</code>. In order to set up our cluster, we need to know the IP addresses of each node in our job, then we need to launch the training scipt on each node individually. We’ll use a set of bash scripts to do this.</p>
 <p><strong>run.sh</strong></p>
 <p>The rm commands inthis script delete files from any previous runs. The purpose of this script is to qsub the <code>tflow_job.sh</code> job on the number of nodes that you want to include in training. This is the only scipt you’ll run to launch your training. You can use it by running: <code>./run.sh &lt;NUM_NODES&gt;</code></p>
@@ -385,14 +397,14 @@ div.csl-indent {
 <pre><code>./run.sh &lt;NUM_NODES&gt;</code></pre>
 </div>
 </div>
-<div id="references-helpful-sites-1" class="section level3 hasAnchor" number="4.2.3">
-<h3><span class="header-section-number">4.2.3</span> References &amp; Helpful Sites<a href="distributed-training.html#references-helpful-sites-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="references-helpful-sites-1" class="section level3 hasAnchor" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> References &amp; Helpful Sites<a href="distributed-training.html#references-helpful-sites-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 </div>
 </div>
-<div id="other-distributed-training-frameworks" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Other Distributed Training Frameworks<a href="distributed-training.html#other-distributed-training-frameworks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="microsofts-deepspeed" class="section level3 hasAnchor" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> Microsoft’s DeepSpeed<a href="distributed-training.html#microsofts-deepspeed" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="other-distributed-training-frameworks" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Other Distributed Training Frameworks<a href="distributed-training.html#other-distributed-training-frameworks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="microsofts-deepspeed" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Microsoft’s DeepSpeed<a href="distributed-training.html#microsofts-deepspeed" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
 </div>
 </div>

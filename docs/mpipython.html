@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Distributed ML at W&amp;M</title>
+  <title>Chapter 3 MPI &amp; Python | Distributed ML at W&amp;M</title>
   <meta name="description" content="Resrouces and help for distributed ML on the W&amp;M cluster" />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Distributed ML at W&amp;M" />
+  <meta property="og:title" content="Chapter 3 MPI &amp; Python | Distributed ML at W&amp;M" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Resrouces and help for distributed ML on the W&amp;M cluster" />
   <meta name="github-repo" content="heatherbaier/distributed-wm.github.io" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Distributed ML at W&amp;M" />
+  <meta name="twitter:title" content="Chapter 3 MPI &amp; Python | Distributed ML at W&amp;M" />
   
   <meta name="twitter:description" content="Resrouces and help for distributed ML on the W&amp;M cluster" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="disttraining.html"/>
-
+<link rel="prev" href="setup.html"/>
+<link rel="next" href="disttraining.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,17 +197,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered hasAnchor">
-<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="mpipython" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> MPI &amp; Python<a href="mpipython.html#mpipython" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="what-is-mpi" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> What is MPI?<a href="mpipython.html#what-is-mpi" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>MPI stands for Message Passing Interface and is a way of passing messages between mutiple computers running a parallel program.</p>
+<p>Parallel computing works by launching multiple processes on a computer that run in parallel. Each os these processes is called a rank.</p>
+<p><code>Rank: Each process in a parallel program has a unique rank, i.e. an integer identifier. The rank value is between 0 and the number of processes - 1.</code></p>
+<p>The sum of all of these ranks is called the <em>world size</em>.</p>
+<p><code>World Size: Total number of ranks in a parallel program.</code></p>
+</div>
+<div id="types-of-communication" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Types of Communication<a href="mpipython.html#types-of-communication" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="blocking-communication" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Blocking Communication<a href="mpipython.html#blocking-communication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="non-blocking-communication" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Non-Blocking Communication<a href="mpipython.html#non-blocking-communication" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="point-to-point-p2p" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Point to Point (P2P)<a href="mpipython.html#point-to-point-p2p" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Point-to-Point (P2P) communication occurs when only two prcoess within a parallel program communicate with each other. For example, there exists a parallel program that has 10 processes (i.e. the world size is 10). Process 1 sends a message to Process 2 letting it know that it has completed a task, but does not communicate with any other process. This is an example of P2P communication.</p>
+<div id="blocking-p2p-methods" class="section level4 hasAnchor" number="3.2.3.1">
+<h4><span class="header-section-number">3.2.3.1</span> Blocking P2P Methods<a href="mpipython.html#blocking-p2p-methods" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>send</p>
+<p>recv</p>
+</div>
+<div id="non-blocking-p2p-methods" class="section level4 hasAnchor" number="3.2.3.2">
+<h4><span class="header-section-number">3.2.3.2</span> Non-Blocking P2P Methods<a href="mpipython.html#non-blocking-p2p-methods" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>isend</p>
+<p>irecv</p>
+</div>
+</div>
+<div id="collective-communication-cc" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Collective Communication (CC)<a href="mpipython.html#collective-communication-cc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Collective communication (CC) is a type of communication that involves all or some of the processes in a parallel program. For example, we take our same parallel program that has 10 processes. The objective of process 1 is to average a value that is stored on each of the other processes. In this case.process 1 would issue a CC call to the other nodes and <em>collect</em> their values in order to average them. Because process 1 communicated with multiple nodes instead of just 1, this is an example of collective communication.</p>
+<div id="cc-methods" class="section level4 hasAnchor" number="3.2.4.1">
+<h4><span class="header-section-number">3.2.4.1</span> CC Methods<a href="mpipython.html#cc-methods" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>bcast</p>
+<p>scatter</p>
+<p>gather</p>
+</div>
+</div>
+<div id="references-helpful-sites" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> References &amp; Helpful Sites<a href="mpipython.html#references-helpful-sites" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="disttraining.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="setup.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="disttraining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -238,7 +282,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-references.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-mpi_python.Rmd",
 "text": "Edit"
 },
 "history": {

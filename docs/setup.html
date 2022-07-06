@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Distributed ML at W&amp;M</title>
+  <title>Chapter 2 Logging in and Setting up your HPC Account | Distributed ML at W&amp;M</title>
   <meta name="description" content="Resrouces and help for distributed ML on the W&amp;M cluster" />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Distributed ML at W&amp;M" />
+  <meta property="og:title" content="Chapter 2 Logging in and Setting up your HPC Account | Distributed ML at W&amp;M" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="Resrouces and help for distributed ML on the W&amp;M cluster" />
   <meta name="github-repo" content="heatherbaier/distributed-wm.github.io" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Distributed ML at W&amp;M" />
+  <meta name="twitter:title" content="Chapter 2 Logging in and Setting up your HPC Account | Distributed ML at W&amp;M" />
   
   <meta name="twitter:description" content="Resrouces and help for distributed ML on the W&amp;M cluster" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="disttraining.html"/>
-
+<link rel="prev" href="index.html"/>
+<link rel="next" href="mpipython.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -197,17 +197,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered hasAnchor">
-<h1>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="setup" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Logging in and Setting up your HPC Account<a href="setup.html#setup" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="login" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Login<a href="setup.html#login" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Open a terminal on your computer and type: <code>ssh [wm_username]@[subcluster_name].sciclone.wm.edu</code>. When prompted for a password, enter your W&amp;M password.</p>
+<p>Your terminal should now look similar to this:</p>
+<p><img src="login.png" width="400"/></p>
+</div>
+<div id="home-workspace" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Home Workspace<a href="setup.html#home-workspace" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Type <code>pwd</code> (print working directory) into your terminal. It should print out: <code>/sciclone/home20/&lt;wm_username&gt;</code>.</p>
+<p>This is your landing directory - you’ll open to this every time you login.</p>
+<p>Now type <code>ls</code> into your terminal. If this is the first time you are loggin in, you should see 4 folders print out. You can find read more about the purpose of each of these folders here: <a href="https://www.wm.edu/offices/it/services/researchcomputing/using/files/index.php" class="uri">https://www.wm.edu/offices/it/services/researchcomputing/using/files/index.php</a></p>
+</div>
+<div id="working-folders" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> Working Folders<a href="setup.html#working-folders" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You are free to make as many folders here as you like, as long as you do not store large amounts of data in them.</p>
+<p>Best practice is to store code files within your home20 directory and data within a folder provided to you by Dan (or another professor) in either <code>/sciclone/geograd/</code> or <code>/sciclone/geounder/</code></p>
+<p>You can make a new folder using the <code>mkdir &lt;folder_name&gt;</code> command</p>
+</div>
+<div id="pbstop" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> PBSTOP<a href="setup.html#pbstop" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Type <code>pbstop</code> into your terminal. You should see a screen that looks like this:</p>
+<p><img src="pbstop.png" width="600"/></p>
+<p>This is your ‘birdseye view’ of the cluster.</p>
+<p><img src="pbstop_ex.png" width="600"/></p>
+<p>Some helpful terminology:</p>
+<p><code>Cluster: The cluster is the set of all subclusters wihtin the W&amp;M HPC system.</code></p>
+<p><code>Subcluster: a set of computers with similar comutuing charactheristics.</code></p>
+<p>W&amp;M’s HPC has multiple subclsuters incluiding Vortex, Bora, Hima, Meltemi, etc… You can read about each of them here: <a href="https://www.wm.edu/offices/it/services/researchcomputing/hw/nodes/index.php" class="uri">https://www.wm.edu/offices/it/services/researchcomputing/hw/nodes/index.php</a></p>
+<p><code>Node: A node is an individual computer within a subcluster.</code></p>
+<p><code>Core (aka Processor): An individual processor on a node.</code></p>
+<p>Each node on Vortex has 12 processors. This basically means you can run 12 individual python processes on a Vortex node, or 1 process on each processor. You could also run one process across multiple processors (or the whole node) if you need all of the memory available.</p>
+</div>
+<div id="conda-environments" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Conda Environments<a href="setup.html#conda-environments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Setting up Conda environments on the clsuter is very similar to how you would do it on your local computer. It is highly recommended that you use conda environments when using the HPC.</p>
+<p>To create a conda environment and install pacakges, first copy these two lines into your terminal and hit enter.</p>
+<p><code>source "/usr/local/anaconda3-2021.05/etc/profile.d/conda.csh"</code></p>
+<p><code>module load anaconda3/2021.05</code></p>
+<p>This will source and load the Anaconda module so it os ready for you to use.</p>
+<p>Next, follow the standard steps for creating a conda environment. Use the following line to create your environment and type y when prompted <code>Proceed ([y]/n)?</code></p>
+<p><code>conda create -n [ENVNAME]</code></p>
+<p>Next, activate your neew environemtn by typing:</p>
+<p><code>conda activate [ENVNAME]</code></p>
+<p>To see a list of all the environments you’ve created, type:</p>
+<p><code>conda info --envs</code></p>
+<p>From here, you can install any packges you need for a program using standard pip install commands. I.e.:</p>
+<p><code>pip install pandas</code></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="disttraining.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mpipython.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -238,7 +286,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-references.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-intro.Rmd",
 "text": "Edit"
 },
 "history": {
